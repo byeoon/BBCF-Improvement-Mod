@@ -25,7 +25,7 @@ void StageSelectWidget()
 
 		ImGui::AlignTextToFramePadding();
 		ImGui::TextUnformatted("Stage"); ImGui::SameLine();
-		if (ImGui::SliderByte("##Stage", &selectedStage, 0, STAGES_COUNT))
+		if (ImGui::SliderByte("##Stage", &selectedStage, 0, STAGES_COUNT - 1))
 		{
 			*g_gameVals.stageSelect_X = stages[selectedStage][0];
 			*g_gameVals.stageSelect_Y = stages[selectedStage][1];

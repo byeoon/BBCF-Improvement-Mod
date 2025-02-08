@@ -17,6 +17,7 @@ enum CustomGameMode
 {
 	CustomGameMode_None,
 	CustomGameMode_Steroid,
+	CustomGameMode_Hyper,
 	CustomGameMode_Vampire,
 	CustomGameMode_ExVampire,
 	CustomGameMode_OnePunch,

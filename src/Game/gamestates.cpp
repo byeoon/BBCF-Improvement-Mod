@@ -22,6 +22,7 @@ bool isHitboxOverlayEnabledInCurrentState()
 	bool isEnabledInCurrentMode =
 		*g_gameVals.pGameMode == GameMode_Training ||
 		*g_gameVals.pGameMode == GameMode_Versus ||
+		*g_gameVals.pGameMode == GameMode_Online ||
 		*g_gameVals.pGameMode == GameMode_ReplayTheater;
 
 	return isEnabledInCurrentState && isEnabledInCurrentMode;

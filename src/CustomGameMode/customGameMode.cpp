@@ -7,6 +7,7 @@
 #include "Overlay/Logger/ImGuiLogger.h"
 
 float steroid_hp_multiplier = 2.5f;
+float hyper_hp_multiplier = 3.0f;
 float steroid_overdriveChargeMultiplier = 2.0f;
 int steroid_maximumHeat = 15000;
 float steroid_heatModifyMultiplier = 1.2f;
@@ -31,6 +32,35 @@ void InitSteroidMode()
 
 	g_interfaces.player1.GetData()->currentHP *= steroid_hp_multiplier;
 	g_interfaces.player2.GetData()->currentHP *= steroid_hp_multiplier;
+
+	// Change heat limits from 10000 to 15000
+	int result = HookManager::OverWriteBytes(
+		(char*)steroid_HeatModifyJmpBackAddr,
+		(char*)steroid_HeatModifyJmpBackAddr + 0x28,
+		"\x10\x27\x00\x00",
+		"xxxx",
+		"\x98\x3A\x00\x00");
+
+	if (result)
+	{
+		LOG(2, "Modified steroid_HeatModify, overwritten bytes: %d\n", result);
+	}
+}
+
+void InitHyperMode()
+{
+	// todo change
+	g_interfaces.player1.GetData()->heatMeter = 10000;
+	g_interfaces.player2.GetData()->heatMeter = 10000; // inf heat included i think...
+
+	LOG(2, "InitHyperMode\n");
+	g_imGuiLogger->Log("[system] Starting Hyper Mode\n");
+
+	g_interfaces.player1.GetData()->maxHP *= hyper_hp_multiplier;
+	g_interfaces.player2.GetData()->maxHP *= hyper_hp_multiplier;
+
+	g_interfaces.player1.GetData()->currentHP *= hyper_hp_multiplier;
+	g_interfaces.player2.GetData()->currentHP *= hyper_hp_multiplier;
 
 	// Change heat limits from 10000 to 15000
 	int result = HookManager::OverWriteBytes(
@@ -170,6 +200,14 @@ std::vector<GameMode_t> CreateGameModesVector()
 			"- Automatic Heat gain on low HP: +100%\n- Burst Gauge gain: +100%",
 			InitSteroidMode,
 			{ "steroid_OverdriveCharge", "steroid_HeatModify", "steroid_HealthModify" }
+		},
+		{
+			"Hyper",
+			CustomGameMode_Hyper,
+			"A more intense version of steroid <3\n"\
+			"- Infinite Heat\n- Max HP: +200%",
+			InitHyperMode,
+			{ "steroid_OverdriveCharge", "steroid_HealthModify", "infiniteheat_HeatModify"}
 		},
 		{
 			"Vampire",

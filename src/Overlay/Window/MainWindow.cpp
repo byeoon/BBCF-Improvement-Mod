@@ -13,6 +13,7 @@
 #include "Overlay/Widget/ActiveGameModeWidget.h"
 #include "Overlay/Widget/GameModeSelectWidget.h"
 #include "Overlay/Widget/StageSelectWidget.h"
+#include "Overlay/Widget/SongSelectWidget.h"
 
 #include <sstream>
 
@@ -356,13 +357,13 @@ void MainWindow::DrawGameplaySettingSection() const
 	if (!isInMatch() && !isOnVersusScreen() && !isOnReplayMenuScreen() && !isOnCharacterSelectionScreen())
 	{
 		ImGui::HorizontalSpacing();
-		ImGui::TextDisabled("YOU ARE NOT IN MATCH!");
+		ImGui::TextDisabled("You are not in a match!");
 
 		ImGui::HorizontalSpacing();
-		ImGui::TextDisabled("YOU ARE NOT IN REPLAY MENU!");
+		ImGui::TextDisabled("You are not in the replay menu!");
 
 		ImGui::HorizontalSpacing();
-		ImGui::TextDisabled("YOU ARE NOT IN CHARACTER SELECTION!");
+		ImGui::TextDisabled("You are not on the character selection menu!");
 
 		return;
 	}
@@ -371,6 +372,7 @@ void MainWindow::DrawGameplaySettingSection() const
 	{
 		ImGui::HorizontalSpacing();
 		StageSelectWidget();
+		SongSelectWidget();
 		ImGui::VerticalSpacing(10);
 	}
 

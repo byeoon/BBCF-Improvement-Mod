@@ -8,10 +8,6 @@
 #include "Overlay/imgui_utils.h"
 #include <cstdlib>
 
-
-
-
-
 void ReplayDBPopupWindow::Draw()
 {
     ImVec4 black = ImVec4(0.060, 0.060, 0.060, 1);
@@ -26,7 +22,7 @@ void ReplayDBPopupWindow::Draw()
     ImGui::BeginPopupModal("Enable/Disable Automatic Replay Uploads?", NULL, ImGuiWindowFlags_AlwaysAutoResize);
 
         const char txt[] = "\n\
-            IM BOBLEIS has a feature to automatically upload your replays to a public central repository.            \n\
+            BBBCFIM's fork has a feature to automatically upload your replays to a public central repository.            \n\
             This feature allows : \n\
 \n\
             \t - Easy Sharing : Facilitates sharing of replays between players.            \n\
