@@ -221,9 +221,17 @@ void PaletteEditorWindow::ShowAllPaletteSelections(const std::string& windowID)
 
 void PaletteEditorWindow::ShowReloadAllPalettesButton()
 {
-	if (ImGui::Button("Reload custom palettes"))
+	if (ImGui::Button("Reload Custom Palettes"))
 	{
 		g_interfaces.pPaletteManager->ReloadAllPalettes();
+	}
+}
+
+void PaletteEditorWindow::ShowOpenPaletteFolderButton()
+{
+	if (ImGui::Button("Open Palette Folder"))
+	{
+		ShellExecute(NULL, NULL, L"C:\\Windows", NULL, NULL, SW_SHOWNORMAL);
 	}
 }
 

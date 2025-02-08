@@ -65,6 +65,7 @@ public:
 	~PaletteEditorWindow() override = default;
 	void ShowAllPaletteSelections(const std::string& windowID);
 	void ShowReloadAllPalettesButton();
+	void ShowOpenPaletteFolderButton();
 	void OnMatchInit();
 protected:
 	void Draw() override;

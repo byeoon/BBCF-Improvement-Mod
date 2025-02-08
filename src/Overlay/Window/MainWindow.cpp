@@ -53,9 +53,9 @@ break;
 
 void MainWindow::Draw()
 {
-	ImGui::Text("Toggle me with %s", Settings::settingsIni.togglebutton.c_str());
-	ImGui::Text("Toggle Online with %s", Settings::settingsIni.toggleOnlineButton.c_str());
-	ImGui::Text("Toggle HUD with %s", Settings::settingsIni.toggleHUDbutton.c_str());
+	ImGui::Text("Open this menu with %s", Settings::settingsIni.togglebutton.c_str());
+	ImGui::Text("Open the Online menu with %s", Settings::settingsIni.toggleOnlineButton.c_str());
+	ImGui::Text("Toggle ingame HUD with %s", Settings::settingsIni.toggleHUDbutton.c_str());
 	ImGui::Separator();
 
 	ImGui::VerticalSpacing(5);
@@ -112,7 +112,7 @@ void MainWindow::DrawUtilButtons() const
 
 void MainWindow::DrawCurrentPlayersCount() const
 {
-	ImGui::Text("Current online players:");
+	ImGui::Text("Online Players:");
 	ImGui::SameLine();
 
 	std::string currentPlayersCount = g_interfaces.pSteamApiHelper ? g_interfaces.pSteamApiHelper->GetCurrentPlayersCountString() : "<No data>";
@@ -121,13 +121,13 @@ void MainWindow::DrawCurrentPlayersCount() const
 
 void MainWindow::DrawAvatarSection() const
 {
-	if (!ImGui::CollapsingHeader("Avatar settings"))
+	if (!ImGui::CollapsingHeader("> Avatar"))
 		return;
 
 	if (g_gameVals.playerAvatarAddr == NULL && g_gameVals.playerAvatarColAddr == NULL && g_gameVals.playerAvatarAcc1 == NULL && g_gameVals.playerAvatarAcc2 == NULL)
 	{
 		ImGui::HorizontalSpacing();
-		ImGui::TextDisabled("CONNECT TO NETWORK MODE FIRST");
+		ImGui::TextDisabled("Connect to Network Mode first!");
 	}
 	else
 	{
@@ -140,19 +140,19 @@ void MainWindow::DrawAvatarSection() const
 
 void MainWindow::DrawFrameAdvantageSection() const
 {
-	if (!ImGui::CollapsingHeader("Framedata"))
+	if (!ImGui::CollapsingHeader("> Framedata"))
 		return;
 
 	if (!isInMatch())
 	{
 		ImGui::HorizontalSpacing();
-		ImGui::TextDisabled("YOU ARE NOT IN MATCH!");
+		ImGui::TextDisabled("You are not in a match!");
 		return;
 	}
 	else if (!(*g_gameVals.pGameMode == GameMode_Training || *g_gameVals.pGameMode == GameMode_ReplayTheater))
 	{
 		ImGui::HorizontalSpacing();
-		ImGui::TextDisabled("YOU ARE NOT IN TRAINING MODE OR REPLAY THEATER!");
+		ImGui::TextDisabled("You are not in training mode or the replay theatre!");
 		return;
 	}
 
@@ -229,13 +229,13 @@ void MainWindow::DrawFrameAdvantageSection() const
 
 void MainWindow::DrawCustomPalettesSection() const
 {
-	if (!ImGui::CollapsingHeader("Custom palettes"))
+	if (!ImGui::CollapsingHeader("> Palettes"))
 		return;
 
 	if (!isInMatch())
 	{
 		ImGui::HorizontalSpacing();
-		ImGui::TextDisabled("YOU ARE NOT IN MATCH!");
+		ImGui::TextDisabled("You are not in a match!");
 	}
 	else
 	{
@@ -258,13 +258,13 @@ void MainWindow::DrawCustomPalettesSection() const
 
 void MainWindow::DrawHitboxOverlaySection() const
 {
-	if (!ImGui::CollapsingHeader("Hitbox overlay"))
+	if (!ImGui::CollapsingHeader("> Hitboxes"))
 		return;
 
 	if (!isHitboxOverlayEnabledInCurrentState())
 	{
 		ImGui::HorizontalSpacing();
-		ImGui::TextDisabled("YOU ARE NOT IN TRAINING, VERSUS, OR REPLAY!");
+		ImGui::TextDisabled("You are not in training, VS, online, or replay mode!");
 		return;
 	}
 
@@ -351,20 +351,13 @@ void MainWindow::DrawHitboxOverlaySection() const
 
 void MainWindow::DrawGameplaySettingSection() const
 {
-	if (!ImGui::CollapsingHeader("Gameplay settings"))
+	if (!ImGui::CollapsingHeader("> Gameplay"))
 		return;
 
 	if (!isInMatch() && !isOnVersusScreen() && !isOnReplayMenuScreen() && !isOnCharacterSelectionScreen())
 	{
 		ImGui::HorizontalSpacing();
-		ImGui::TextDisabled("You are not in a match!");
-
-		ImGui::HorizontalSpacing();
-		ImGui::TextDisabled("You are not in the replay menu!");
-
-		ImGui::HorizontalSpacing();
-		ImGui::TextDisabled("You are not on the character selection menu!");
-
+		ImGui::TextDisabled("You are not in a match, replay menu, or character selection menu!");
 		return;
 	}
 
@@ -398,7 +391,7 @@ void MainWindow::DrawGameplaySettingSection() const
 	}
 }
 void MainWindow::DrawControllerSettingSection() const {
-	if (!ImGui::CollapsingHeader("Controller Settings"))
+	if (!ImGui::CollapsingHeader("> Controller"))
 		return;
 	static bool controller_position_swapped = false;
 	
@@ -426,11 +419,6 @@ void MainWindow::DrawLinkButtons() const
 	if (ImGui::Button("Enable/Disable Upload")) {
 		m_pWindowContainer->GetWindow(WindowType_ReplayDBPopup)->ToggleOpen();
 	}
-	ImGui::ButtonUrl("Discord", MOD_LINK_DISCORD, BTN_SIZE);
-
-	ImGui::SameLine();
-	ImGui::ButtonUrl("Forum", MOD_LINK_FORUM, BTN_SIZE);
-
 	ImGui::SameLine();
 	ImGui::ButtonUrl("GitHub", MOD_LINK_GITHUB, BTN_SIZE);
 	
@@ -438,7 +426,7 @@ void MainWindow::DrawLinkButtons() const
 
 void MainWindow::DrawLoadedSettingsValuesSection() const
 {
-	if (!ImGui::CollapsingHeader("Loaded settings.ini values"))
+	if (!ImGui::CollapsingHeader("> Settings.ini Values"))
 		return;
 
 	// Not using ImGui columns here because they are bugged if the window has always_autoresize flag. The window 

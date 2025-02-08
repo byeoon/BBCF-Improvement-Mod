@@ -5,6 +5,9 @@ My custom fork of the BlazBlue CentralFiction Improvement Mod. This adds small t
 - Added 'Hyper' gamemode
 - Song selector
 - Hitboxes in online matches
+- Notifications off by default
+- Open Palette in Explorer button
+- UI Improvements and tweaks
 
 ## Installing
 Download dinput8.dll, settings.ini and optionally palettes.ini from the latest release and put it in your BlazBlue Centralfiction folder. There is no need to compile it yourself for regular usage.
